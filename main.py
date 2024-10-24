@@ -56,7 +56,7 @@ def game_loop(screen, clock, dt, player1):
 
                 if bullet.collCheck(obj):
                     print("Coll detected")
-                    obj.kill()
+                    obj.split()
                     bullet.kill()
 
         for obj in drawable:
