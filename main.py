@@ -25,6 +25,7 @@ def game_loop(screen, clock, dt, player1):
                 return
             
         screen.fill((0,0,0), rect=None, special_flags=0)
+        player1.update(dt)
         player1.draw(screen)
         dt = (clock.tick(60)/1000)
         pygame.display.flip()
