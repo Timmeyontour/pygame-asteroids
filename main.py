@@ -27,7 +27,7 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     # setup group memberships (venn diagram)
     player.Player.containers = (updatable, drawable)
-    shot.Shot.containers = (updatable, drawable)
+    shot.Shot.containers = (shots, updatable, drawable)
     asteroid.Asteroid.containers = (asteroids, updatable, drawable)
     asteroidfield.AsteroidField.containers = (updatable)
     player1 = player.Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
@@ -47,9 +47,17 @@ def game_loop(screen, clock, dt, player1):
             obj.update(dt)
         
         for obj in asteroids:
+
             if obj.collCheck(player1):
                 print("Game over")
                 sys.exit()
+
+            for bullet in shots:
+
+                if bullet.collCheck(obj):
+                    print("Coll detected")
+                    obj.kill()
+                    bullet.kill()
 
         for obj in drawable:
             obj.draw(screen)
